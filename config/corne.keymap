@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * My custom keyboard for my needs as a developer, vim user and spanish speaker.
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/ {
+    behaviors {
+        qts: quotes {
+            compatible = "zmk,behavior-mod-morph";
+            label = "QUOTES";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp AT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        curly: curly_brackets {
+            compatible = "zmk,behavior-mod-morph";
+            label = "CURLY_BRACKETS";
+            #binding-cells = <0>;
+            bindings = <&kp SQT>, <&kp BSLH>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        paren: parenthesis {
+            compatible = "zmk,behavior-mod-morph";
+            label = "PARENTHESIS";
+            #binding-cells = <0>;
+            bindings = <&kp ASTRK>, <&kp LPAR>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        sqrbr: square_brackets {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SQUARE_BRACKETS";
+            #binding-cells = <0>;
+            bindings = <&kp DQT>, <&kp PIPE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        accnt: accents {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ACCENTS";
+            #binding-cells = <0>;
+            bindings = <&kp LBKT>, <&kp LA(BSLH)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+// ╭------┬-----┬-----┬-----┬-----┬-----╮               ╭-----┬-----┬-----┬-----┬-----┬------╮
+// |  TAB |  Q  |  W  |  E  |  R  |  T  |               |  Y  |  U  |  I  |  O  |  P  | BKSP |
+// |  ESC |  A  |  S  |  D  |  F  |  G  |               |  H  |  J  |  K  |  L  |  Ñ  | CTRL |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |-----╮   ╭-----|  N  |  M  |  ,  |  .  |  '  | SHFT |
+// ╰------------------------| GUI | LWR | SPC |   | ENT | RSE | ALT |-----┴-----┴-----┴------╯
+//                          ╰-----------------╯   ╰-----------------╯
+            bindings = <
+   &kp TAB   &kp Q &kp W &kp E &kp R    &kp T                     &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
+   &kp ESC   &kp A &kp S &kp D &kp F    &kp G                     &kp H &kp J  &kp K     &kp L   &kp SEMI &kp RCTRL
+   &kp LSHFT &kp Z &kp X &kp C &kp V    &kp B                     &kp N &kp M  &kp COMMA &kp DOT &qts     &kp RSHFT
+                               &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
+            >;
+        };
+
+        lower_layer {
+// ╭------┬------┬------┬-----┬-----┬-----╮               ╭-----┬-----┬-----┬-----┬-----┬------╮
+// |  TAB |  1   |  2   |  3  |  4  |  5  |               |  6  |  7  |  8  |  9  |  0  | BKSP |
+// |  ESC |      |      |     |     |     |               | LFT | DWN |  UP | RGT |     | CTRL |
+// | SHFT |BT_NXT|BT_CLR|CLALL|     |     |-----╮   ╭-----|     |     |     |     |     | SHFT |
+// ╰--------------------------| GUI | --- | SPC |   | ENT |     | ALT |-----┴-----┴-----┴------╯
+//                            ╰-----------------╯   ╰-----------------╯
+            bindings = <
+   &kp TAB   &kp N1     &kp N2     &kp N3          &kp N4   &kp N5                      &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
+   &kp ESC   &trans     &trans     &trans          &trans   &trans                      &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &kp RCTRL
+   &kp LSHFT &bt BT_NXT &bt BT_CLR &bt BT_CLR_ALL  &trans   &trans                      &trans   &trans   &trans &trans    &trans &kp RSHFT
+                                                   &kp LGUI &none  &kp SPACE   &kp RET  &trans   &kp RALT
+            >;
+        };
+
+        raise_layer {
+// ╭------┬-----┬-----┬-----┬-----┬-----╮               ╭-----┬-----┬-----┬-----┬-----┬------╮
+// |  TAB |  |  |  ¡  |  ¿  | { } |     |               |     |  *  |  _  |  \  |  $  | BKSP |
+// |  ESC |  &  |  !  |  ?  | ( ) | < > |               |  =  |  +  |  -  |  /  |  ~  | CTRL |
+// | SHFT |  @  |     |     | [ ] |     |-----╮   ╭-----|     |  ^  |  #  |  %  | ´ ` | SHFT |
+// ╰------------------------| GUI |     | SPC |   | ENT |     | ALT |-----┴-----┴-----┴------╯
+//                          ╰-----------------╯   ╰-----------------╯
+            bindings = <
+   &kp TAB   &kp GRAVE &kp PLUS  &kp EQUAL &curly   &trans                       &trans   &kp RBRC    &kp QMARK   &kp LA(MINUS) &kp DLLR     &kp BSPC
+   &kp ESC   &kp CARET &kp EXCL  &kp UNDER &paren   &kp NUBS                     &kp RPAR &kp RBKT    &kp FSLH    &kp AMPS      &kp LA(SEMI) &kp RCTRL
+   &kp LSHFT &kp LA(Q) &trans    &trans    &sqrbr   &trans                       &trans   &kp LA(SQT) &kp HASH    &kp PRCNT     &accnt       &kp RSHFT
+                                           &kp LGUI &trans   &kp SPACE   &kp RET &trans   &kp RALT
+            >;
+        };
+    };
+};
