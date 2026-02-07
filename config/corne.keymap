@@ -40,13 +40,6 @@
             bindings = <&kp DQT>, <&kp PIPE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        ltgt: less_than_greater_than {
-            compatible = "zmk,behavior-mod-morph";
-            label = "LESS_THAN_GREATER_THAN";
-            #binding-cells = <0>;
-            bindings = <&kp LT>, <&kp GT>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
         accnt: accents {
             compatible = "zmk,behavior-mod-morph";
             label = "ACCENTS";
@@ -98,7 +91,7 @@
 //                          ╰-----------------╯   ╰-----------------╯
             bindings = <
    &kp TAB   &kp GRAVE &kp PLUS  &kp EQUAL &curly   &trans                       &trans   &kp RBRC    &kp QMARK   &kp LA(MINUS) &kp DLLR     &kp BSPC
-   &kp ESC   &kp CARET &kp EXCL  &kp UNDER &paren   &ltgt                        &kp RPAR &kp RBKT    &kp FSLH    &kp AMPS      &kp LA(SEMI) &kp RCTRL
+   &kp ESC   &kp CARET &kp EXCL  &kp UNDER &paren   &kp NUBS                     &kp RPAR &kp RBKT    &kp FSLH    &kp AMPS      &kp LA(SEMI) &kp RCTRL
    &kp LSHFT &kp LA(Q) &trans    &trans    &sqrbr   &trans                       &trans   &kp LA(SQT) &kp HASH    &kp PRCNT     &accnt       &kp RSHFT
                                            &kp LGUI &trans   &kp SPACE   &kp RET &trans   &kp RALT
             >;
